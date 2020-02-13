@@ -8,16 +8,21 @@ class App extends Component {
     pickedIndex: null,
     questionsTotal: 0,
     currentNumber: 0,
-    correctAnswerIndex: null
+    correctAnswerIndex: null,
+    totalScores: 0
   };
   componentDidMount = () => {
     this.setState({ questionsTotal: arr.length });
   };
 
   selectAnswer = e => {
-    const { currentNumber } = this.state;
+    const { currentNumber, totalScores } = this.state;
     const picked = Number(e.target.value);
     const correctAnswerIndex = arr[currentNumber].answer;
+    const score = arr[currentNumber].score;
+    if (picked === correctAnswerIndex) {
+      this.setState({ totalScores: totalScores + score });
+    }
     this.setState({
       disableButton: true,
       pickedIndex: picked,
@@ -58,7 +63,8 @@ class App extends Component {
       disableButton,
       pickedIndex,
       currentNumber,
-      correctAnswerIndex
+      correctAnswerIndex,
+      totalScores
     } = this.state;
     return (
       <div className="questionnaire">
@@ -108,6 +114,11 @@ class App extends Component {
           >
             Next
           </button>
+        </div>
+        <div className="total-scores">
+          <p>
+            Total Scores : <b>{totalScores}</b>
+          </p>
         </div>
       </div>
     );

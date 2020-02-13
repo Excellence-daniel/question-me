@@ -18,11 +18,13 @@
 
     &-selected {
       background-color: red;
+      border: 1px solid red;
       color: white;
     }
 
     &-correct {
-      background: blue;
+      background: #00b0ff;
+      border: 1px solid #00b0ff;
       color: white;
     }
   }
@@ -46,13 +48,20 @@
 
     &:hover {
       cursor: pointer;
-      background: #6bc8ff;
-      border: 1px solid #6bc8ff;
+      background: #89c4e7a1;
+      border: 1px solid #b5d9f0;
       color: white;
     }
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .total-scores {
+    margin-top: 3rem;
+    p {
+      font-size: 11px;
     }
   }
 }
