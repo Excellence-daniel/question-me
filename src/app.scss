@@ -1,0 +1,44 @@
+.questionnaire {
+  position: relative;
+  left: 530px;
+  top: 13rem;
+  border: 1px solid #ececec;
+  width: fit-content;
+  padding: 5rem;
+  text-align: center;
+
+  .question {
+    margin-bottom: 3rem;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .option-button {
+    display: block;
+    height: 3rem;
+    font-size: 15px;
+    width: 47rem;
+    margin: 1rem;
+    background: none;
+    border-radius: 30px;
+
+    &.disabled {
+      &:hover {
+        cursor: no-drop;
+        background: #d7d7d7;
+        border: 1px solid #d7d7d7;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #6bc8ff;
+      border: 1px solid #6bc8ff;
+      color: white;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
