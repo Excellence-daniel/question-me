@@ -7,44 +7,81 @@ class App extends Component {
     disableButton: false,
     pickedIndex: null,
     questionsTotal: 0,
-    currentNumber: 0
+    currentNumber: 0,
+    correctAnswerIndex: null
   };
   componentDidMount = () => {
     this.setState({ questionsTotal: arr.length });
   };
 
   selectAnswer = e => {
+    const { currentNumber } = this.state;
     const picked = Number(e.target.value);
-    this.setState({ disableButton: true, pickedIndex: picked });
-    console.log(picked, e.target.id);
+    const correctAnswerIndex = arr[currentNumber].answer;
+    this.setState({
+      disableButton: true,
+      pickedIndex: picked,
+      correctAnswerIndex
+    });
   };
 
   handlePrevious = () => {
     const { currentNumber } = this.state;
     if (currentNumber > 0) {
-      this.setState({ currentNumber: currentNumber - 1, disableButton: false });
+      this.setState({
+        currentNumber: currentNumber - 1
+      });
+      this.resetStateAnswers();
     }
   };
 
   handleNext = () => {
     const { currentNumber } = this.state;
     if (currentNumber < arr.length) {
-      this.setState({ currentNumber: currentNumber + 1, disableButton: false });
+      this.setState({
+        currentNumber: currentNumber + 1
+      });
+      this.resetStateAnswers();
     }
   };
 
+  resetStateAnswers = () => {
+    this.setState({
+      pickedIndex: null,
+      correctAnswerIndex: null,
+      disableButton: false
+    });
+  };
+
   render() {
-    const { disableButton, pickedIndex, currentNumber } = this.state;
-    console.log(currentNumber);
+    const {
+      disableButton,
+      pickedIndex,
+      currentNumber,
+      correctAnswerIndex
+    } = this.state;
     return (
       <div className="questionnaire">
         <div>
-          <p className="question">{arr[currentNumber].question}</p> 
+          <p className="question">{arr[currentNumber].question}</p>
           <div>
             {arr[currentNumber].options.map((option, index) => {
               return (
                 <button
                   key={index}
+                  id={
+                    pickedIndex &&
+                    correctAnswerIndex !== null &&
+                    index === pickedIndex &&
+                    index === correctAnswerIndex &&
+                    pickedIndex === correctAnswerIndex
+                      ? "button-id-correct"
+                      : index === pickedIndex
+                      ? "button-id-selected"
+                      : index === correctAnswerIndex
+                      ? "button-id-correct"
+                      : "button-id"
+                  }
                   className={
                     disableButton ? "option-button disabled" : "option-button"
                   }

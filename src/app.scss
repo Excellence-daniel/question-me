@@ -13,6 +13,20 @@
     font-weight: 700;
   }
 
+  #button-id {
+    display: block;
+
+    &-selected {
+      background-color: red;
+      color: white;
+    }
+
+    &-correct {
+      background: blue;
+      color: white;
+    }
+  }
+
   .option-button {
     display: block;
     height: 3rem;
